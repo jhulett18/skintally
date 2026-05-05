@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { getSupabase } from '@/lib/supabase'
 
-// GET /api/packages — list all packages ordered by expiry
 export async function GET() {
+  const supabase = getSupabase()
   const { data, error } = await supabase
     .from('packages')
     .select('*')
@@ -15,9 +15,9 @@ export async function GET() {
   return Response.json({ packages: data })
 }
 
-// POST /api/packages — add a new package
 export async function POST(req: NextRequest) {
   try {
+    const supabase = getSupabase()
     const body = await req.json()
     const { client_name, client_email, package_type, sessions_purchased, sessions_used, expiry_date, booking_link } = body
 

@@ -1,15 +1,18 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.SUPABASE_URL!
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+// ─── Lazy singleton — safe to import at build time ───────────────────────────
 
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error('Missing Supabase environment variables')
+let _client: SupabaseClient | null = null
+
+export function getSupabase(): SupabaseClient {
+  if (!_client) {
+    const url = process.env.SUPABASE_URL ?? ''
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY ?? ''
+    // The client is created lazily; runtime errors will surface if env vars are missing
+    _client = createClient(url, key, { auth: { persistSession: false } })
+  }
+  return _client
 }
-
-export const supabase = createClient(supabaseUrl, supabaseKey, {
-  auth: { persistSession: false },
-})
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -20,16 +23,9 @@ export interface Package {
   package_type: string
   sessions_purchased: number
   sessions_used: number
-  expiry_date: string        // ISO date string YYYY-MM-DD
+  expiry_date: string
   booking_link: string | null
   created_at: string
-}
-
-export interface SendLog {
-  id: string
-  package_id: string
-  reminder_days: number
-  sent_at: string
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

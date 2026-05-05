@@ -1,11 +1,11 @@
 import { NextRequest } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { getSupabase } from '@/lib/supabase'
 
-// POST /api/packages/[id]/use — increment sessions used by 1
 export async function POST(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const supabase = getSupabase()
   const { id } = await params
 
   const { data: pkg, error: fetchError } = await supabase
