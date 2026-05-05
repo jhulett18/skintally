@@ -1,7 +1,16 @@
 import { Resend } from 'resend'
 import { Package, sessionsRemaining, daysUntilExpiry } from './supabase'
 
-const resend = new Resend(process.env.RESEND_API_KEY!)
+// ─── Lazy Resend instance — safe to import at build time ─────────────────────
+
+let _resend: Resend | null = null
+
+function getResend(): Resend {
+  if (!_resend) {
+    _resend = new Resend(process.env.RESEND_API_KEY ?? '')
+  }
+  return _resend
+}
 
 interface ReminderEmailOptions {
   pkg: Package
@@ -9,6 +18,7 @@ interface ReminderEmailOptions {
 }
 
 export async function sendReminderEmail({ pkg, reminderDays }: ReminderEmailOptions) {
+  const resend = getResend()
   const sessions = sessionsRemaining(pkg)
   const days = daysUntilExpiry(pkg.expiry_date)
   const bookingLink = pkg.booking_link || 'https://your-booking-link.com'
@@ -88,7 +98,7 @@ export async function sendReminderEmail({ pkg, reminderDays }: ReminderEmailOpti
           <span class="package-value days-badge">${days}</span>
         </div>
       </div>
-      <a href="${bookingLink}" class="cta-btn">Book My Next Session →</a>
+      <a href="${bookingLink}" class="cta-btn">Book My Next Session &rarr;</a>
       <p style="font-size:13px;color:#7a6a72;line-height:1.6;">
         Questions? Reply to this email or call us directly.
         We look forward to seeing you soon.
@@ -96,7 +106,7 @@ export async function sendReminderEmail({ pkg, reminderDays }: ReminderEmailOpti
     </div>
     <div class="footer">
       This is an automated reminder from your aesthetics practice.<br/>
-      Powered by <strong>Skintally</strong> · automationbyJT
+      Powered by <strong>Skintally</strong> &middot; automationbyJT
     </div>
   </div>
 </body>
@@ -104,7 +114,7 @@ export async function sendReminderEmail({ pkg, reminderDays }: ReminderEmailOpti
 `
 
   const subjectLine =
-    reminderDays === 7 ? `⚠️ ${sessions} session${sessions !== 1 ? 's' : ''} expiring in ${days} days — ${pkg.package_type}` :
+    reminderDays === 7 ? `Your ${pkg.package_type} package — ${days} days left (${sessions} session${sessions !== 1 ? 's' : ''} remaining)` :
     reminderDays === 14 ? `Your ${pkg.package_type} package expires in 2 weeks` :
     `Reminder: ${sessions} session${sessions !== 1 ? 's' : ''} remaining — ${pkg.package_type}`
 
