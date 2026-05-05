@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1320"/>
+      <stop offset="100%" style="stop-color:#2d2438"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a0a8"/>
+      <stop offset="100%" style="stop-color:#e8d0d5"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  
+  <!-- Subtle grid pattern -->
+  <rect x="0" y="0" width="1200" height="630" fill="none" opacity="0.03"
+    style="background-image:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.1) 40px,rgba(255,255,255,0.1) 41px)"/>
+  
+  <!-- Radial glow -->
+  <ellipse cx="600" cy="200" rx="400" ry="250" fill="#c9a0a8" opacity="0.06"/>
+  
+  <!-- Logo mark -->
+  <g transform="translate(72, 72)">
+    <rect width="64" height="64" rx="16" fill="#c9a0a8" opacity="0.15"/>
+    <path d="M18 32 C18 23 23.5 18 32 18 C40.5 18 46 23 46 32 C46 41 40.5 47 32 47" 
+      stroke="#c9a0a8" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <circle cx="32" cy="32" r="5" fill="#c9a0a8"/>
+    <line x1="32" y1="18" x2="32" y2="12" stroke="#c9a0a8" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Brand name -->
+  <text x="154" y="118" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+    font-size="36" font-weight="700" fill="white" letter-spacing="-0.5">Skintally</text>
+  
+  <!-- Main headline -->
+  <text x="72" y="290" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+    font-size="64" font-weight="700" fill="white" letter-spacing="-1">Never let a prepaid</text>
+  <text x="72" y="370" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+    font-size="64" font-weight="700" fill="url(#accent)" letter-spacing="-1">treatment package lapse.</text>
+  
+  <!-- Subtext -->
+  <text x="72" y="440" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+    font-size="26" fill="rgba(255,255,255,0.6)" letter-spacing="0">
+    Auto-sends expiry reminders at T-30, T-14, and T-7 days before sessions expire.
+  </text>
+  
+  <!-- Pills -->
+  <g transform="translate(72, 490)">
+    <rect width="160" height="40" rx="20" fill="#c9a0a8" opacity="0.2"/>
+    <text x="80" y="25" text-anchor="middle" font-family="-apple-system, sans-serif" 
+      font-size="15" font-weight="600" fill="#c9a0a8">For Med Spas</text>
+  </g>
+  <g transform="translate(244, 490)">
+    <rect width="190" height="40" rx="20" fill="#c9a0a8" opacity="0.2"/>
+    <text x="95" y="25" text-anchor="middle" font-family="-apple-system, sans-serif" 
+      font-size="15" font-weight="600" fill="#c9a0a8">South Florida</text>
+  </g>
+  <g transform="translate(446, 490)">
+    <rect width="210" height="40" rx="20" fill="#c9a0a8" opacity="0.2"/>
+    <text x="105" y="25" text-anchor="middle" font-family="-apple-system, sans-serif" 
+      font-size="15" font-weight="600" fill="#c9a0a8">automationbyJT</text>
+  </g>
+</svg>
